@@ -1,0 +1,167 @@
+/*
+Reset
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+  color: inherit;
+	vertical-align: baseline;
+}
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+
+/* end Reset */
+html {
+  box-sizing: border-box;
+}
+/**
+ * Enable smooth scrolling on the whole document
+ */
+html {
+	scroll-behavior: smooth;
+}
+/**
+ * Disable smooth scrolling when users have prefers-reduced-motion enabled
+ */
+@media screen and (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2em;
+  margin: .67em 0;
+}
+h2 {
+  font-size: 1.5em;
+  margin: .75em 0;
+}
+h3 {
+  font-size: 1.17em;
+  margin: .83em 0;
+}
+h5 {
+  font-size: .83em;
+  margin: 1.5em 0;
+}
+h6 {
+  font-size: .75em;
+  margin: 1.67em 0;
+}
+h1, h2, h3, h4,h5, h6 {
+  font-weight: bolder
+}
+
+section#contactme {
+  height: 100vh;
+  overflow: hidden;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  background-color: #e3e2f4;
+}
+
+a:link {
+  font-weight: bolder;
+}
+
+a:hover {
+  color: #33002ccf;
+}
+
+.imgContainer {
+  overflow: hidden;
+}
+
+img#kjh_teignmouth_beavh_2021_full {
+  margin-left: calc(100vw - 1055px);
+}
+@media screen and (min-width: 1080px) {
+  img#kjh_teignmouth_beavh_2021_full {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.ctaContainer {
+  padding: 5px 0;
+  height: 75px;
+}
+.ctaContainer svg {
+  font-size: 50px;
+}
+
+section#timeline {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  background-color: #F3F4E2;
+}
+
+ul {
+    display: block;
+    list-style-type: none;
+    line-height:1.5em;
+    margin: 0 1em;
+    padding: 0 40px;
+}
+
+ul li {
+  margin-bottom: .75em;
+}
+/* Workaround to allow screen readers to identify list itmes with list-style-type: none */
+ul li::before {
+  content: "\200B";
+}
+
+li svg {
+  width: 2em;
+}
+
+li .timelineYear {
+  font-weight: bolder;
+}
+
+section#recommendations {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  background-color: #F4E2F3;
+  width:100%;
+}
+
+.recommendationText {
+  font-style: italic;
+  width: 90%;
+  background-color: white;
+  padding: 2em 2em;
+  border-radius: 33%;
+  margin-top: 2em;
+  margin-bottom:2em;
+
+}
