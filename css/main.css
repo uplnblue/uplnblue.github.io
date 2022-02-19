@@ -78,13 +78,19 @@ h1, h2, h3, h4,h5, h6 {
   font-weight: bolder
 }
 
+p {
+	margin: 25px;
+	line-height: 25px;
+}
+
 section#contactme {
+	/*width: 100%;*/
   height: 100vh;
   overflow: hidden;
   display:flex;
   flex-direction:column;
   align-items: center;
-  background-color: #e3e2f4;
+  /* background-color: #e3e2f4; */
 }
 
 a:link {
@@ -93,6 +99,7 @@ a:link {
 
 a:hover {
   color: #33002ccf;
+
 }
 
 .imgContainer {
@@ -116,52 +123,178 @@ img#kjh_teignmouth_beavh_2021_full {
   font-size: 50px;
 }
 
-section#timeline {
+section#aboutme {
   display:flex;
   flex-direction:column;
   align-items:center;
-  background-color: #F3F4E2;
+/*  background-color: #F3F4E2; */
 }
 
-ul {
-    display: block;
-    list-style-type: none;
-    line-height:1.5em;
-    margin: 0 1em;
-    padding: 0 40px;
-}
 
-ul li {
-  margin-bottom: .75em;
-}
-/* Workaround to allow screen readers to identify list itmes with list-style-type: none */
-ul li::before {
-  content: "\200B";
-}
 
-li svg {
-  width: 2em;
-}
-
-li .timelineYear {
-  font-weight: bolder;
-}
-
-section#recommendations {
+section#notarinos {
   display:flex;
   flex-direction:column;
   align-items:center;
-  background-color: #F4E2F3;
+/*  background-color: #F4E2F3; */
   width:100%;
+	height:100vh;
 }
 
-.recommendationText {
-  font-style: italic;
-  width: 90%;
-  background-color: white;
-  padding: 2em 2em;
-  border-radius: 33%;
-  margin-top: 2em;
-  margin-bottom:2em;
-
+div#notarinosApp {
+	display: flex;
+	flex-direction: column;
 }
+
+div#instructions {
+	flex: 1 1 30%;
+}
+
+div#tuningControls {
+	position: relative;
+	width: 100%;
+	height: 150px;
+}
+
+
+.tuningControl {
+	width: 50px;
+	height: 50px;
+}
+
+#tune0 {
+	position: absolute;
+	top: 55%;
+	left: 3%;
+}
+
+#tune1 {
+	position: absolute;
+	top: 30%;
+	left: 18%;
+}
+
+#tune2 {
+	position: absolute;
+	top: 10%;
+	left: 33%;
+}
+
+#startStopNotarinos {
+	position: absolute;
+	top: 50%;
+	left: 36%;
+	z-index:3;
+}
+
+/* #pickContainer:hover {
+	z-index:0;
+} */
+
+
+#logo {
+	stroke: #ff4141;
+  fill: #ff4141;
+}
+
+#pick {
+	stroke:#dc0000;
+	fill:#0e232e;
+}
+
+
+#tune3 {
+	position: absolute;
+	top: 10%;
+	left: 53%;
+}
+
+
+#tune4 {
+	position: absolute;
+	top: 30%;
+	left: 68%;
+}
+
+
+#tune5 {
+	position: absolute;
+	top: 55%;
+	left: 83%;
+}
+
+.tuningGraphic {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius:50%;
+	border: 2px solid black;
+	background: linear-gradient( 0deg, #b0bec5, #b0bec5 50%, #cfd8dc 51%);
+	transition: all 0.3s ease;
+}
+
+div.tuneUp {
+	position:absolute;
+	top: -10px;
+	width:50px;
+	height:35px;
+	border-top-left-radius: 50% 100%;
+	border-top-right-radius: 50% 100%;
+	mix-blend-mode: soft-light;
+	z-index:2;
+}
+
+.tuneUp:hover {
+	border-top: 10px solid #625280;
+	mix-blend-mode: normal;
+}
+
+div.tuneDown {
+	position:absolute;
+	bottom: -10px;
+	width:50px;
+	height:35px;
+	border-bottom-left-radius: 50% 100%;
+	border-bottom-right-radius: 50% 100%;
+	z-index:2;
+}
+
+.tuneDown:hover {
+	border-bottom: 10px solid #544d77;
+	mix-blend-mode: normal;
+}
+
+div.tuningNote {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	font-size: 25px;
+	color: rgb(255, 255, 255);
+  mix-blend-mode: difference;
+}
+
+
+
+div#stage {
+	flex: 1 0 60%;
+  /* width: 100vw; */
+  min-width: 360px;
+  max-width: 400px;
+  /* height: 100vh; */
+  min-height: 640px;
+  /*margin: 0 auto;*/
+}
+
+canvas {
+	position: absolute;
+}
+#fretboard { z-index: 0; }
+#visualization { z-index: 2; pointer-events:none;}
+#tuning {z-index: 3; pointer-events:none;}
