@@ -172,7 +172,7 @@ const STANDARD_TUNING = [
 var get_tuning_from_ui = function() {
   let uiTuning = [];
   tuningNotes.forEach((tuningNote, i) => {
-    uiTuning[tuningNote.stringIndex] = ALL_TUNING_CHOICES[tuningNote.currentIndex];
+    uiTuning[tuningNote.stringIndex] = ALL_TUNING_CHOICES[tuningNote.currentindex];
   });
   return uiTuning;
 }
@@ -248,7 +248,7 @@ function populate_tuning_notes() {
 
 // TUNING Canvas
 function TuningElement(props) {
-  this.stringNum = parseInt(props.stringNum);
+  this.stringnum = parseInt(props.stringnum);
   this.width = props.width;
   this.height = props.height;
   this.x = props.x;
@@ -256,7 +256,7 @@ function TuningElement(props) {
   this.rightEdge = props.right;
   this.leftEdge = props.x;
 
-  this.circleFromRight = this.stringNum <= 2;
+  this.circleFromRight = this.stringnum <= 2;
 
   this.getCenterPoint = function() {
     let centerPoint = [];
@@ -267,14 +267,14 @@ function TuningElement(props) {
 
   this.getCircleStartPoint = function() {
     let circleStartPoint = [];
-    circleStartPoint[0] = (this.circleFromRight) ? this.rightEdge + (strings[this.stringNum].width / 2) : this.x - (strings[this.stringNum].width / 2);
+    circleStartPoint[0] = (this.circleFromRight) ? this.rightEdge + (strings[this.stringnum].width / 2) : this.x - (strings[this.stringnum].width / 2);
     circleStartPoint[1] = this.getCenterPoint()[1];
     return circleStartPoint;
   }
 
   this.getLineStartPoint = function() {
     let lineStartPoint = [];
-    lineStartPoint[0] = strings[this.stringNum].x;
+    lineStartPoint[0] = strings[this.stringnum].x;
     lineStartPoint[1] = canvasTuning.height;
     return lineStartPoint;
   }
@@ -286,7 +286,7 @@ function TuningElement(props) {
   // all this circle to right stuff is uncessesarry
   this.draw = function() {
     ctxT.save();
-    ctxT.lineWidth = strings[this.stringNum].width;
+    ctxT.lineWidth = strings[this.stringnum].width;
     // ctxT.strokeStyle = 'black';
     ctxT.lineJoin = 'round';
 
@@ -331,8 +331,8 @@ function TuningGraphic(props) {
 function TuningNote(props) {
   this.domElement = props.tuningNoteElement;
   this.stringIndex = parseInt(props.stringIndex);
-  this.currentIndex = parseInt(this.domElement.dataset.currentindex);
-  //this.currentNote = ALL_TUNING_CHOICES(this.currentIndex);
+  this.currentindex = parseInt(this.domElement.dataset.currentindex);
+  //this.currentNote = ALL_TUNING_CHOICES(this.currentindex);
   this.standardIndex = STANDARD_TUNING[this.stringIndex][2];
 
   this.changeNote = (e) => {
@@ -347,20 +347,20 @@ function TuningNote(props) {
       }
     }
     let direction = e.target.direction;
-    let oldIndex = this.currentIndex;
+    let oldIndex = this.currentindex;
     if (direction == 'up') {
-      this.currentIndex = Math.min(this.currentIndex + 1, ALL_TUNING_CHOICES.length - 1);
+      this.currentindex = Math.min(this.currentindex + 1, ALL_TUNING_CHOICES.length - 1);
 
     } else if (direction == 'down') {
-      this.currentIndex = Math.max(this.currentIndex - 1, 0)
+      this.currentindex = Math.max(this.currentindex - 1, 0)
     }
-    this.domElement.dataset.currentindex = this.currentIndex;
+    this.domElement.dataset.currentindex = this.currentindex;
     // rotate associated graphic
-    if (oldIndex != this.currentIndex) {
+    if (oldIndex != this.currentindex) {
       tuningGraphics[this.stringIndex].rotate(direction);
     }
 
-    this.domElement.innerHTML = `${ALL_TUNING_CHOICES[this.currentIndex][0]}${ALL_TUNING_CHOICES[this.currentIndex][1]}`;
+    this.domElement.innerHTML = `${ALL_TUNING_CHOICES[this.currentindex][0]}${ALL_TUNING_CHOICES[this.currentindex][1]}`;
 
     // tuneLive will return if we're not Live, otherwise, calling it here ensures it happens after Change Note.
     tune_live();
@@ -381,8 +381,8 @@ function TuningNote(props) {
   this.tuneStandardTuning = function() {
   //  console.log('tuning note element tune standard tuning called');
     let note = ALL_TUNING_CHOICES[parseInt(this.standardIndex)];
-    this.currentIndex = this.standardIndex;
-    this.domElement.dataset.currentIndex = this.standardIndex;
+    this.currentindex = this.standardIndex;
+    this.domElement.dataset.currentindex = this.standardIndex;
     this.domElement.innerHTML = `${note[0]}${note[1]}`;
   }
 }
@@ -467,7 +467,7 @@ function draw_canvas_tuning() {
       x: tuningRect.x - tuningControlsRect.x,
       y: tuningRect.y - tuningControlsRect.y,
       right: tuningRect.right - tuningControlsRect.x,
-      stringNum: thisIndex
+      stringnum: thisIndex
     });
     tuningElements[thisIndex] = tuningEl;
     tuningEl.draw();
