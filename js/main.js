@@ -310,9 +310,10 @@ function TuningGraphic(props) {
 
   this.domElement = props.tuningGraphicEl;
   this.stringIndex = props.stringIndex;
-  this.currentAngle = 0;
+  this.currentAngle = parseInt(this.domElement.dataset.currentangle);
 
   this.rotate = function(direction) {
+      console.log(`before: rotations${this.currentAngle}`);
     let sign;
     if (direction == 'up') {
       sign = this.stringIndex <= 2 ? -1 : 1;
@@ -322,7 +323,8 @@ function TuningGraphic(props) {
 
     this.domElement.setAttribute("style", `transform: rotate(${(this.currentAngle + (sign * 30))}deg)`);
     this.currentAngle = this.currentAngle + (sign * 30);
-    //console.log(this.currentAngle);
+    this.domElement.dataset.currentangle = this.currentAngle;
+    console.log(`after: rotations${this.currentAngle}`);
   }
 }
 
