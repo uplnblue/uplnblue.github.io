@@ -44,7 +44,7 @@
     <p>This is a JavaScript / HTML5 / canvas app to help guitarists learn the fretboard. It uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> library's analyser node to handle the Fast Fourier
       Transform and most of the additional processing.<br>I used Harmonic Product Spectrum to further process the data from the FFT for better pitch detection.<br>The pitch detection has some octave errors (e.g. it might detect A4 instead of A2).  The octave errors don't affect the main goal of the app, because it means to show all octaves of a note regardless of the actual octave played, but there are also some non-octave harmonic errors. I'm working on tests to look closer at it.</p>
     <div id="instructions">
-      <p>If you play a note, the app shows you where all the other notes are for one octave of each string. <br>You can change the tuning of any string with the "tuning circles", or reset to <button id="tuneStandard" class="tuneButton">Standard Tuning</button>.
+      <p>If you play a note, the app shows you where all the other notes are for one octave of each string. <br>You can change the tuning of any string with the "tuning circles" -- click the top half of the circle to tune up one note, click the bottom half of the circle to tune down one note -- or reset to <button id="tuneStandard" class="tuneButton">Standard Tuning</button>.
         <br>Click the pick to start or stop the app.</p>
 
     </div>
