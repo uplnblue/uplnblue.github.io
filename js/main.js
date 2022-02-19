@@ -185,8 +185,8 @@ function tune_standard_tuning() {
 function tune_strings(tuning) {
   // clear previous tuning
   intialise_notes_dict();
-  // console.log('tune_strings called');
-  // console.dir(tuning);
+//   console.log('tune_strings called');
+//   console.dir(tuning);
   try {
     if (tuning) {
       tuning.forEach((note, string) => {
@@ -207,6 +207,8 @@ const tune_standard_tuning_ui = function() {
   tuningNotes.forEach((el, i) => {
     el.tuneStandardTuning();
   });
+  // tuneLive will do nothing if we are not live, but ensures order if we are Live
+  tune_live();
 }
 
 
@@ -331,16 +333,18 @@ function TuningNote(props) {
   //this.currentNote = ALL_TUNING_CHOICES(this.currentIndex);
   this.standardIndex = STANDARD_TUNING[this.stringIndex][2];
 
-  this.changeNote = function(e, direction) {
-    console.log('change note called');
-    console.log(e.code, direction);
-    //console.log(this.domElement);
+  this.changeNote = (e) => {
+  //console.log('change note called');
+  //console.log(e.code, e.target.direction);
+  //console.log(this);
+  //console.log(this.domElement);
     if (e && e.code) {
       console.log(e.code);
       if (!(e.code == 'Enter' || e.code =='Space')) {
         return;
       }
     }
+    let direction = e.target.direction;
     let oldIndex = this.currentIndex;
     if (direction == 'up') {
       this.currentIndex = Math.min(this.currentIndex + 1, ALL_TUNING_CHOICES.length - 1);
@@ -351,16 +355,25 @@ function TuningNote(props) {
     this.domElement.dataset.currentindex = this.currentIndex;
     // rotate associated graphic
     if (oldIndex != this.currentIndex) {
-      tuningGraphics[this.stringIndex].rotate(direction)
+      tuningGraphics[this.stringIndex].rotate(direction);
     }
 
     this.domElement.innerHTML = `${ALL_TUNING_CHOICES[this.currentIndex][0]}${ALL_TUNING_CHOICES[this.currentIndex][1]}`;
+
+    // tuneLive will return if we're not Live, otherwise, calling it here ensures it happens after Change Note.
+    tune_live();
   }
+
+  // use the control to remove the "anonymous"? event handlers.  this.changeNote counts as anonymous.
+  this.controller = new AbortController();
+
   this.registerNote = function(tuningControlElements) {
-    tuningControlElements[0].addEventListener('click', (e) => this.changeNote(e,'up'));
-    tuningControlElements[1].addEventListener('click', (e) => this.changeNote(e,'down'));
-    tuningControlElements[0].addEventListener('keydown', (e) => this.changeNote(e,'up'));
-    tuningControlElements[1].addEventListener('keydown', (e) => this.changeNote(e,'down'));
+    tuningControlElements[0].direction = 'up';
+    tuningControlElements[1].direction = 'down';
+    tuningControlElements[0].addEventListener('click', this.changeNote, {signal: this.controller.signal});
+    tuningControlElements[1].addEventListener('click', this.changeNote, {signal: this.controller.signal});
+    tuningControlElements[0].addEventListener('keydown', this.changeNote, {signal: this.controller.signal});
+    tuningControlElements[1].addEventListener('keydown', this.changeNote, {signal: this.controller.signal});
   }
 
   this.tuneStandardTuning = function() {
@@ -891,10 +904,15 @@ function stop_notarinos() {
 }
 
 function setup_initial_view() {
+  console.log('setup_initial_view called');
 
   // set up tuning ui
   generate_all_tuning_choices(['C', 2], ['G', 4]);
 
+  // remove existing unanmed event listners
+  tuningNotes.forEach((tuningNote, i) => {
+    tuningNote.controller.abort();
+  });
   // make objects from DOM tuning control elements
   populate_tuning_notes();
   populate_tuning_graphics();
@@ -929,11 +947,6 @@ function setup_initial_view() {
 
   //update Start-Stop button
   handleStartStopUI();
-  // handler for if user changes the tuning while app is running
-  document.querySelectorAll(['.tuneUp', '.tuneDown', '.tuneButton']).forEach((tuneButton, i) => {
-    tuneButton.addEventListener('click', tuneLive, false);
-    tuneButton.addEventListener('keydown', tuneLive, false);
-  });
  }
 
 // Main function
@@ -972,9 +985,9 @@ function start_notarinos() {
     .finally(handleStartStopUI);
   }
 
-
-const tuneLive = function(e) {
-//  console.log("called tuneLive");
+// handles when tuning is called while the app is running
+const tune_live = function(e) {
+console.log("called tuneLive");
   if (e && e.code) {
   //  console.log(e.code);
     if (!(e.code == 'Enter' || e.code =='Space')) {
