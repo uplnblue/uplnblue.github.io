@@ -244,7 +244,7 @@ div.tuneUp {
 	border-top-left-radius: 50% 100%;
 	border-top-right-radius: 50% 100%;
 	mix-blend-mode: soft-light;
-	z-index:2;
+	z-index:3;
 }
 
 .tuneUp:hover {
@@ -259,7 +259,7 @@ div.tuneDown {
 	height:35px;
 	border-bottom-left-radius: 50% 100%;
 	border-bottom-right-radius: 50% 100%;
-	z-index:2;
+	z-index:3;
 }
 
 .tuneDown:hover {
