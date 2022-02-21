@@ -140,14 +140,13 @@ section#notarinos {
   width:100%;
 	/* height:100vh; */
 }
-
-div#notarinosApp {
+div#instructions {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 }
-
-div#instructions {
-	flex: 1 1 30%;
+div#notarinosApp {
+	width: min-content;
 }
 
 div#tuningControls {
@@ -155,7 +154,6 @@ div#tuningControls {
 	width: 100%;
 	height: 150px;
 }
-
 
 .tuningControl {
 	width: 50px;
